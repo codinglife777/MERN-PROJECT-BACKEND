@@ -43,6 +43,7 @@ View reports of your presence, reach and interaction of your social networks
   
 - Applicaction Config
 
+  - **profile** - 
   - **add networks** - 
   - **link network** - 
   - **network account** - 
