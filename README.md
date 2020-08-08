@@ -1,6 +1,6 @@
 # MERN-PROJECT-BACKEND
 
-BRANDDED - SCORE - REACH - SCOPE - RANGE
+BRANDDED - SCORE - RANKING - REACH - SCOPE - RANGE
 
 Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part Time March 2020
 
@@ -14,6 +14,11 @@ Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part
 
 It is a social media application that will allow you to control your online presence. It will measure your influence and give you a unified view of all your social media accounts. Presence, reach, interaction of the publications, make a ranking of punctuation compared to your friends on social networks
 
+## MVP
+
+The user registers and links his social networks.
+View reports of your presence, reach and interaction of your social networks
+
 ## Epics / User Stories
 
 - Website
@@ -25,26 +30,24 @@ It is a social media application that will allow you to control your online pres
 
 - Authentication
 
-  - **signup** - As a user I want to sign up on the application so that I can trade with my money
-  - **login** - As a user I want to be able to log in on the application so that I can get back to my account
+  - **signup** - As a user I want to sign up on the application
+  - **login** - As a user I want to be able to log in on the application
   - **logout** - As a user I want to be able to log out from the application so that I can make sure no one will access my account
 
-- Applicaction
+- Applicaction Reports
 
-  - **dashboard** - As a logged user I want to trade whit global exchange markets like NASDAQ, IBEX35 or CryptoMoney
-  - **trade** - As a user I want trade with investments, buy or selling in the market.
-  - **wallet** - As a user I want to work and know all the information of my money and my investments.
+  - **home** - 
+  - **social profile** - 
+  - **evolution** - 
+  - **post** - 
+  
+- Applicaction Config
 
-- Reports
-
-  - **markets** - As a user I want to see all information in trade and cryptocurrency markets.
-  - **transactions** - As a user I want to see all the transaction I made.
-
-- Utilities
-
-  - **profile** - As a user I want to see and update all information refered to me.
-  - **support** - As a user I want te see and crete suppor tickets.
-  - **log** - As a user I want to see all my activity in application.
+  - **add networks** - 
+  - **link network** - 
+  - **network account** - 
+  - **post** - 
+  - **top ranking** -
 
 ## Backlog
 
@@ -156,7 +159,11 @@ body:
 
 User model
 
-Nerworks model
+Networks model
+
+Report model
+
+Ranking model
 
 ```
 User model
@@ -255,7 +262,7 @@ The url to your repository and to your deployed project
 
 ### Wireframe
 
-- [Wireframe Link](https://excalidraw.com/#json=5756475787968512,giKZUdwBx2-XYlq2FVzCkA)
+- [Wireframe Link](https://excalidraw.com/#json=5083460385374208,A_crmZXs0-GzenOPz1zLBw)
 
 ### Agile Board
 
