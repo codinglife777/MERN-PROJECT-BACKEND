@@ -12,7 +12,7 @@ Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part
 
 ## Description
 
-An app for improve your money gaming with a Global Digital Coin Exchange.
+It is a social media application that will allow you to control your online presence. It will measure your influence and give you a unified view of all your social media accounts. Presence, reach, interaction of the publications, make a ranking of punctuation compared to your friends on social networks
 
 ## Epics / User Stories
 
@@ -154,6 +154,10 @@ body:
 
 ## Models
 
+User model
+
+Nerworks model
+
 ```
 User model
 {
@@ -251,7 +255,7 @@ The url to your repository and to your deployed project
 
 ### Wireframe
 
-- [Wireframe Link](https://excalidraw.com/#json=5158956179652608,ObcsWHSgXnAHjF1Jiy8QRw)
+- [Wireframe Link](https://excalidraw.com/#json=5756475787968512,giKZUdwBx2-XYlq2FVzCkA)
 
 ### Agile Board
 
