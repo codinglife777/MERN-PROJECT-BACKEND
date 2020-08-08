@@ -1,6 +1,6 @@
 # MERN-PROJECT-BACKEND
 
-CLOUT - BRANDDED - SCORE - RANKING - REACH - SCOPE - RANGE
+KLOUT
 
 Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part Time March 2020
 
@@ -9,6 +9,8 @@ Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part
 - [Chus Santana](https://github.com/chusantana/)
 
 # Link to App:
+
+https://klout.com
 
 ## Description
 
