@@ -1,6 +1,6 @@
 # MERN-PROJECT-BACKEND
 
-BRANDDED - SCORE - RANKING - REACH - SCOPE - RANGE
+CLOUT - BRANDDED - SCORE - RANKING - REACH - SCOPE - RANGE
 
 Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part Time March 2020
 
