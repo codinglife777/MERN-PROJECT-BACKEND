@@ -4,7 +4,7 @@
 Jesús Santana
 
 # Link to App: 
-https://escape-rooms-fm.herokuapp.com/auth/login
+https://
 
 * use in mode mobile device at browser, iphone X prefered
 
@@ -118,6 +118,9 @@ Event model
 - time: 
 ```
 ``` 
+## Wireframe
+
+[Wireframe Link] (https://excalidraw.com/#json=5633256313585664,8wY927vnLy8R9KmVmI-kSg)
 
 ## Links
 
@@ -126,9 +129,12 @@ Event model
 
 The url to your repository and to your deployed project
 
-[Repository Link] (http://github.com)
+[Repository Link Frontend] (https://github.com/jesussantana/MERN-PROJECT-FRONTEND)
 
-[Deploy Link] ('https://escape-rooms-fm.herokuapp.com/ ')
+[Repository Link Backend] (https://github.com/jesussantana/MERN-PROJECT-BACKEND)
+
+
+[Deploy Link] ('')
 
 
 ### Slides
