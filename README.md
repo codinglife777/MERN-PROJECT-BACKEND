@@ -23,7 +23,7 @@ View reports of your presence, reach and interaction of your social networks
 
 - App
 
-  - **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
+  - **homepage start** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
   - **about** - As a user I want to be know who are rear this project and know how to contact if I have a problem
   - **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
   - **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
