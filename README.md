@@ -10,7 +10,7 @@ Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part
 
 # Link to App:
 
-https://klout.com
+https://klout.one
 
 ## Description
 
