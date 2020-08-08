@@ -21,7 +21,7 @@ View reports of your presence, reach and interaction of your social networks
 
 ## Epics / User Stories
 
-- Website
+- App
 
   - **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
   - **about** - As a user I want to be know who are rear this project and know how to contact if I have a problem
