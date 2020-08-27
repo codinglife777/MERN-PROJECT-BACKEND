@@ -32,8 +32,8 @@ class UserController {
   }
 
   static async delete(id) {
-    const delUser = await User.findByIdAndRemove(id);
-    return delUser;
+    const deleteUser = await User.findByIdAndRemove(id);
+    return deleteUser;
   }
   static async list() {
     return await User.find();
