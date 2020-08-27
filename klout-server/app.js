@@ -11,23 +11,12 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 
-mongoose
-  .connect("mongodb://localhost/klout", { useNewUrlParser: true })
-  .then((x) => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
-  })
-  .catch((err) => {
-    console.error("Error connecting to mongo", err);
-  });
+const app = express();
 
 const app_name = require("./package.json").name;
 const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
-
-const app = express();
 
 /*require('./configs/db.config');
 require('./configs/passport.config');
@@ -59,7 +48,7 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: ["*"], // <== aceptar llamadas desde este dominio
+    origin: ["*"], // <== Calls for this domain
   })
 );
 
@@ -69,10 +58,10 @@ app.locals.title = "Klout, Measure your influence on social media ";
 const index = require("./routes/index");
 app.use("/", index);
 
-const auth = require("./routes/auth.routes");
-app.use("/api/auth", auth);
-
 const user = require("./routes/user.routes.js");
 app.use("/api/users", user);
+
+const auth = require("./routes/auth.routes");
+app.use("/api/auth", auth);
 
 module.exports = app;
