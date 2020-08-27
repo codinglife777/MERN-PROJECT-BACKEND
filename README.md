@@ -89,30 +89,44 @@ body:
 
 ## Models
 
+```
 User model
 
-Networks model
+- username: String
+- email: String
+- name: String
+- password: String
+- image: String
+ 
 
+```
+
+```
+Network model
+
+  facebook: {
+    - username: String
+    - password: String
+  }
+
+  twitter: {
+    - username: String
+    - password: String
+  }
+
+  instagram: {
+    - username: String
+    - password: String
+  }
+
+  user: User id
+
+```
 Report model
 
 Ranking model
 
-```
-User model
-{
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true },
-  imgPath: { type: String },
-  imgName: { type: String },
-  occupation: { type: String },
-  adress: { type: String },
-  city: { type: String },
-  country: { type: String },
-  postalCode: { type: String },
-  about: { type: String },
-}
-```
+
 
 ## Links
 
