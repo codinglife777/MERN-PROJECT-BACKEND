@@ -18,9 +18,9 @@ const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
 
-/*require('./configs/db.config');
+require('./configs/db.config');
 require('./configs/passport.config');
-require('./configs/session.config')(app);*/
+require('./configs/session.config')(app);
 
 // Middleware Setup
 app.use(logger("dev"));
