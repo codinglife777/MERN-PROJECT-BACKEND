@@ -105,12 +105,23 @@ body:
 | PUT    | api/network  | Update Network                                                  |
 | DELETE | api/network  | Delete Network                                                  |
 
+
 ```
 body:
     - facebook
     - twitter
     - instagram
 ```
+| Method | URL          | Description                                                  |
+| ------ | ------------ | ------------------------------------------------------------ |
+| GET    | api/support  | Return Ticket Support                                        |
+| POST   | api/support  | Add Ticket                                                   |
+
+body:
+    - name
+    - email
+    - subject
+    - message
 
 ## Models
 
@@ -187,6 +198,18 @@ Log model
   date: Date
   user: User id
   description: String
+ 
+
+```
+```
+Support model
+
+  user: User id
+  name: String
+  email: String
+  subject: String
+  message: String
+  status: String
  
 
 ```
