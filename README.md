@@ -181,6 +181,16 @@ Ranking model
  
 
 ```
+```
+Log model
+
+  date: Date
+  user: User id
+  description: String
+ 
+
+```
+
 
 ## Links
 

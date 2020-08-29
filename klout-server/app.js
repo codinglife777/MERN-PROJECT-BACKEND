@@ -83,4 +83,14 @@ app.use("/api", user);
 const auth = require("./routes/auth-routes");
 app.use("/api", auth);
 
+const network = require("./routes/network-routes");
+app.use("/api", network);
+
+const support = require("./routes/support-routes");
+app.use("/api", support);
+
+const log = require("./routes/log-routes");
+app.use("/api", log);
+
+
 module.exports = app;
