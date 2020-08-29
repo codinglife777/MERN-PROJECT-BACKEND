@@ -117,11 +117,15 @@ body:
 | GET    | api/support  | Return Ticket Support                                        |
 | POST   | api/support  | Add Ticket                                                   |
 
+
+```
 body:
     - name
     - email
     - subject
     - message
+```
+
 
 ## Models
 
