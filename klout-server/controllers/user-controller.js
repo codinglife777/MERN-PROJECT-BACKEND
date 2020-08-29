@@ -56,23 +56,23 @@ class UserController {
     return await User.findOne({ username });
   }
   static async checkEmail(email) {
-		return await User.findOne({ email });
+    return await User.findOne({ email });
   }
   static async checkUsername(username) {
-		return await User.findOne({ username });
+    return await User.findOne({ username });
   }
   static async checkEmailUser(email, id) {
-		return await User.findOne({
-			email: { $eq: email },
-			_id: { $ne: id },
-		});
+    return await User.findOne({
+      email: { $eq: email },
+      _id: { $ne: id },
+    });
   }
   static async checkUsernameUser(username, id) {
-		return await User.findOne({
-			username: { $eq: username },
-			_id: { $ne: id },
-		});
-	}
+    return await User.findOne({
+      username: { $eq: username },
+      _id: { $ne: id },
+    });
+  }
 }
 
 module.exports = UserController;
