@@ -3,8 +3,8 @@ const router = express.Router();
 
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const uploadCloud = require("../configs/cloudinary.config");
-const UserController = require("../controllers/user.controller");
+const cloudinary = require("../configs/cloudinary.config.js");
+const UserController = require("../controllers/user-controller");
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
@@ -46,5 +46,49 @@ router.post("/logout", (req, res, next) => {
   req.logout();
   res.status(200).json({ message: "Ok" });
 });
+
+/*router.get('/', (req, res, next) => {
+  const { user } = req;
+  res.render('home', { user });
+});
+
+router.get('/login/twitter', passport.authenticate('twitter'));
+
+router.get('/logout', (req, res, next) => {
+req.logout();
+res.redirect('/');
+});
+
+router.get('/return', 
+passport.authenticate('twitter', { failureRedirect: '/' }),
+(req, res, next) => {
+  res.redirect('/');
+});*/
+
+//router.get('/login/facebook', passport.authenticate('facebook'));
+
+/*router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/return', 
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res, next) => {
+    res.redirect('/');
+});/*
+
+router.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/return', 
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res, next) => {
+    res.redirect('/');
+});*/
 
 module.exports = router;
