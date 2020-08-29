@@ -1,4 +1,4 @@
-const UserController = require("../controllers/user.controller");
+const UserController = require("../controllers/user-controller");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs"); // !!!
 const passport = require("passport");
@@ -20,14 +20,14 @@ passport.use(
       .then((foundUser) => {
         if (!foundUser) {
           next(null, false, {
-            message: "User not found.",
+            message: "Incorrect username.",
           });
           return;
         }
 
         if (!bcrypt.compareSync(password, foundUser.password)) {
           next(null, false, {
-            message: `Password not found`,
+            message: `Incorrect password.`,
           });
           return;
         }
@@ -40,3 +40,54 @@ passport.use(
       });
   })
 );
+
+/*passport.use(new Strategy({
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: '/return'
+},
+(accessToken, refreshToken, profile, cb) => {
+  return cb(null, profile);
+}));
+
+passport.serializeUser((user, cb) => {
+cb(null, user);
+});
+
+passport.deserializeUser((obj, cb) => {
+cb(null, obj);
+});*/
+
+/*passport.use(new Strategy({
+  clientID: FACEBOOK_CLIENT_ID,
+  clientSecret: FACEBOOK_CLIENT_SECRET,
+  callbackURL: '/return'
+},
+(accessToken, refreshToken, profile, cb) => {
+  return cb(null, profile);
+}));
+
+passport.serializeUser((user, cb) => {
+cb(null, user);
+});
+
+passport.deserializeUser((obj, cb) => {
+cb(null, obj);
+});*/
+
+/*passport.use(new Strategy({
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: '/return'
+},
+(accessToken, refreshToken, profile, cb) => {
+  return cb(null, profile);
+}));
+
+passport.serializeUser((user, cb) => {
+cb(null, user);
+});
+
+passport.deserializeUser((obj, cb) => {
+cb(null, obj);
+});*/

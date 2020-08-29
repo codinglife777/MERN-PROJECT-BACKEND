@@ -1,4 +1,4 @@
-const User = require("../models/user.model");
+const User = require("../models/user-model");
 const mongoose = require("mongoose");
 
 class UserController {
@@ -45,5 +45,6 @@ class UserController {
     return await User.findOne({ username });
   }
 }
+
 
 module.exports = UserController;

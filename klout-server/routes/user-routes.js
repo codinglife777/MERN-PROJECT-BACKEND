@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../controllers/user.controller");
+const UserController = require("../controllers/user-controller");
 const cloudinary = require("../configs/cloudinary.config.js");
 
 router.get("/", async (req, res, next) => {
