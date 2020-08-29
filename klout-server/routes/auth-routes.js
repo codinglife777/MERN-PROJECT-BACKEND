@@ -5,6 +5,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("../configs/cloudinary.config.js");
 const UserController = require("../controllers/user-controller");
+const Auth = require('../controllers/auth.controller');
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
