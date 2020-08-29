@@ -8,7 +8,7 @@ class LogController {
     return await Log.find();
   }
   static async listByUser(_user) {
-    return await Log.find({ user: _user }).populate("stock");
+    return await Log.find({ user: _user }).populate("");
   }
   static async findOne(_filter) {
     return await Log.findOne(_filter);
