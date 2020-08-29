@@ -11,6 +11,7 @@ const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
+
 const { Strategy } = require("passport-twitter");
 const {
   TWITTER_CONSUMER_KEY,
@@ -76,10 +77,10 @@ app.locals.title = "Klout, Measure your influence on social media ";
 const index = require("./routes/index");
 app.use("/", index);
 
-const user = require("./routes/user-routes.js");
-app.use("/api/users", user);
+const user = require("./routes/user-routes");
+app.use("/api", user);
 
-const auth = require("./routes/auth-routes.js");
-app.use("/api/auth", auth);
+const auth = require("./routes/auth-routes");
+app.use("/api", auth);
 
 module.exports = app;
