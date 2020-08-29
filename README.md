@@ -60,24 +60,23 @@ REAL Transactions
 
 ## ROUTES:  POR DEFINIR
 
-| Method | URL         | Description                                              |
-| ------ | ----------- | -------------------------------------------------------- |
-| GET    | /           | Renders index                                            |
-| GET    | /about      | Renders about                                            |
-| GET    | /auth/login | Redirects to /app/ if user logged in. Renders auth/login |
-| POST   | /auth/login | Redirects to /app/ if user logged in.                    |
+| Method | URL            | Description                                              |
+| ------ | -------------- | -------------------------------------------------------- |
+| GET    | /              | Renders index                                            |
+| GET    | api/auth/login | Redirects to /app/ if user logged in. Renders auth/login |
+| POST   | api/auth/login | Return User data if user logged in.                    |
 
 ```
 body:
-    - username
+    - email
     - password
 ```
 
-| Method | URL          | Description                                               |
-| ------ | ------------ | --------------------------------------------------------- |
-| POST   | /auth/logout | Reditect to /                                             |
-| GET    | /auth/signup | Redirects to /app/ if user logged in. Renders auth/signup |
-| POST   | /auth/signup | Redirects to /app/ if user logged in. Redirect auth/login |
+| Method | URL          | Description                                                  |
+| ------ | ------------ | ------------------------------------------------------------ |
+| POST   | api/auth/logout | Logout                                                    |
+| GET    | api/auth/signup | Redirects to /app/ if user logged in. Renders auth/signup |
+| POST   | api/auth/signup | Add user and return user data                             |
 
 ```
 body:
@@ -87,6 +86,31 @@ body:
     - password
 ```
 
+| Method | URL          | Description                                                  |
+| ------ | ------------ | ------------------------------------------------------------ |
+| GET    | api/user     | Return User                                                  |
+| PUT    | api/user     | Update User                                                  |
+| DELETE | api/user     | Delete User                                                  |
+
+```
+body:
+    - name
+    - email
+```
+
+| Method | URL          | Description                                                     |
+| ------ | ------------ | --------------------------------------------------------------- |
+| POST   | api/network  | Add Network                                                     |
+| GET    | api/network  | Return Network                                                  |
+| PUT    | api/network  | Update Network                                                  |
+| DELETE | api/network  | Delete Network                                                  |
+
+```
+body:
+    - facebook
+    - twitter
+    - instagram
+```
 
 ## Models
 
@@ -123,11 +147,40 @@ Network model
   user: User id
 
 ```
+```
 Report model
 
+  facebook: {
+    - followers: Number
+    - likes: Number
+    - comments: Number
+    - shares: Number
+  }
+
+  twitter: {
+    - followers: Number
+    - likes: Number
+    - comments: Number
+    - retweet: Number
+  }
+
+  Instagram: {
+    - followers: Number
+    - likes: Number
+    - comments: Number
+    - shares: Number
+  }
+
+  user: User id
+
+```
+```
 Ranking model
 
+  user: User id
+ 
 
+```
 
 ## Links
 
