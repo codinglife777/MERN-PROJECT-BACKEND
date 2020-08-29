@@ -81,6 +81,7 @@ body:
 
 ```
 body:
+    - username
     - name
     - email
     - password
@@ -145,7 +146,7 @@ The url to your repository and to your deployed project
 
 ### Agile Board
 
-- [Trello Link]()
+- [Trello Link](https://trello.com/b/Nkjk9Np1/klout)
 
 ### Slides
 
