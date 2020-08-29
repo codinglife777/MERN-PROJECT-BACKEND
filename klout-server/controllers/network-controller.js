@@ -24,6 +24,10 @@ class NetworkController {
     const { username, password } = network;
     return await NetworkController.add(username, password);
   }
+
+  static async list() {
+    return await NetworkController.find();
+  }
 }
 
 module.exports = NetworkController;

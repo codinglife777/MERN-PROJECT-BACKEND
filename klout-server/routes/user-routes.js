@@ -21,6 +21,44 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.post("/", uploadCloud.single("photo"), async (req, res, next) => {
+  let { name, email, password, image } = req.body;
+
+  try {
+    /*if (req.file) {
+      imgPath = req.file.path;
+      imgName = req.file.originalname;
+    } else {
+      imgPath = req.session.user.imgPath;
+      imgName = req.session.user.imgName;
+    }*/
+    await validateSignup(name, email, password);
+    const passwordHash = await bcrypt.hashSync(password, saltRounds);
+    //await Auth.signUp(name, email, passwordHash);
+    //if (req.session.user.passwordHash == passwordHash) {
+    req.session.user = await UserController.set({
+      _id: req.session.user._id,
+      name,
+      email,
+      passwordHash,
+      image,
+    });
+
+    res.redirect("");
+    //} else {
+    //  throw new Error("Password incorrect. Try again.");
+    //}
+  } catch (err) {
+    res.render("app/user", {
+      layout: "app/layout",
+      name,
+      email,
+      password,
+      image,
+    });
+  }
+});
+
 router.put("/", cloudinary.single("Avatar"), async (req, res, next) => {
   if (req.isAuthenticated()) {
     const user = {
