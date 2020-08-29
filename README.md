@@ -195,7 +195,7 @@ The url to your repository and to your deployed project
 
 ### Wireframe
 
-- [Wireframe Link](https://excalidraw.com/#json=5083460385374208,A_crmZXs0-GzenOPz1zLBw)
+- [Wireframe Link](https://excalidraw.com/#json=6009705767895040,49KZI4H-Ua5U1a_n28mY6w)
 
 ### Agile Board
 

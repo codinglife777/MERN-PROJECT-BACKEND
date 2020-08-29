@@ -31,6 +31,17 @@ class UserController {
     }
   }
 
+  static async setImage(id, image) {
+    const editUser = await User.findByIdAndUpdate(
+      id,
+      { image },
+      {
+        new: true,
+      }
+    );
+    return editUser;
+  }
+
   static async delete(id) {
     const deleteUser = await User.findByIdAndRemove(id);
     return deleteUser;
@@ -44,7 +55,24 @@ class UserController {
   static async findByUsername(username) {
     return await User.findOne({ username });
   }
+  static async checkEmail(email) {
+		return await User.findOne({ email });
+  }
+  static async checkUsername(username) {
+		return await User.findOne({ username });
+  }
+  static async checkEmailUser(email, id) {
+		return await User.findOne({
+			email: { $eq: email },
+			_id: { $ne: id },
+		});
+  }
+  static async checkUsernameUser(username, id) {
+		return await User.findOne({
+			username: { $eq: username },
+			_id: { $ne: id },
+		});
+	}
 }
-
 
 module.exports = UserController;
