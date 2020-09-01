@@ -1,4 +1,4 @@
-const Network = require("../models/network-model");
+const Network = require("../models/network.model");
 const mongoose = require("mongoose");
 
 class NetworkController {

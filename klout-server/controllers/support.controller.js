@@ -1,5 +1,5 @@
-const Support = require('../models/support-model');
-const LogController = require('../controllers/log-controller');
+const Support = require('../models/support.model');
+const LogController = require('../controllers/log.controller');
 
 class SupportController {
 	static async get(_id) {

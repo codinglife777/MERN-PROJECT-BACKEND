@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../controllers/user-controller");
-const NetworkController = require("../controllers/network-controller");
+const UserController = require("../controllers/user.controller");
+const NetworkController = require("../controllers/network.controller");
 
 router.get("/network", async (req, res, next) => {
     try {

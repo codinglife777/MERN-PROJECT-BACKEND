@@ -1,4 +1,4 @@
-const UserController = require("../controllers/user-controller");
+const UserController = require("../controllers/user.controller");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs"); // !!!
 const passport = require("passport");
