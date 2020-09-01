@@ -11,6 +11,8 @@ const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
+const passportSetup = require("./config/passport-setup");
+const cookieSession = require("cookie-session");
 
 const { Strategy } = require("passport-twitter");
 const {
