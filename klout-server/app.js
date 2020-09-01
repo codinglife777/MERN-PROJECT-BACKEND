@@ -3,7 +3,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const session = require("express-session");
+//const session = require("express-session");
 const favicon = require("serve-favicon");
 const hbs = require("hbs");
 const mongoose = require("mongoose");
@@ -11,7 +11,7 @@ const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
-const passportSetup = require("./config/passport-setup");
+const passportSetup = require("./configs/passport-setup");
 const cookieSession = require("cookie-session");
 
 const { Strategy } = require("passport-twitter");
@@ -21,7 +21,7 @@ const {
   SESSION_SECRET,
 } = process.env;
 
-const { Strategy } = require("passport-facebook");
+/*const { Strategy } = require("passport-facebook");
 const {
   FACEBOOK_CLIENT_ID,
   FACEBOOK_CLIENT_SECRET,
@@ -35,18 +35,21 @@ const app = express();
 const app_name = require("./package.json").name;
 const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
-);
+);*/
 
 require("./configs/db.config");
 require("./configs/passport.config");
-require("./configs/session.config")(app);
 
+// Create server
+const app = express()
 // Middleware Setup
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+const session = require("./configs/session.config");
+session(app);
 // Express View engine setup
 
 app.use(
@@ -79,20 +82,19 @@ app.locals.title = "Klout, Measure your influence on social media ";
 const index = require("./routes/index");
 app.use("/", index);
 
-const user = require("./routes/user-routes");
+const user = require("./routes/user.routes");
 app.use("/api", user);
 
-const auth = require("./routes/auth-routes");
+const auth = require("./routes/auth.routes");
 app.use("/api", auth);
 
-const network = require("./routes/network-routes");
+const network = require("./routes/network.routes");
 app.use("/api", network);
 
-const support = require("./routes/support-routes");
+const support = require("./routes/support.routes");
 app.use("/api", support);
 
-const log = require("./routes/log-routes");
+const log = require("./routes/log.routes");
 app.use("/api", log);
-
 
 module.exports = app;

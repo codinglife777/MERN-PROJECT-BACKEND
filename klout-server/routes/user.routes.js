@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../controllers/user-controller");
-const cloudinary = require("../configs/cloudinary.config.js");
+const UserController = require("../controllers/user.controller");
+const uploadCloud = require("../configs/cloudinary.config.js");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -59,7 +59,7 @@ router.post("/", uploadCloud.single("photo"), async (req, res, next) => {
   }
 });
 
-router.put("/", cloudinary.single("Avatar"), async (req, res, next) => {
+router.put("/", uploadCloud.single("Avatar"), async (req, res, next) => {
   if (req.isAuthenticated()) {
     const user = {
       _id: req.user._id,

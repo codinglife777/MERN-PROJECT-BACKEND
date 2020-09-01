@@ -1,7 +1,7 @@
 const passport = require("passport");
 const TwitterStrategy = require("passport-twitter");
 const keys = require("./keys");
-const User = require("../models/user-model");
+const User = require("../models/user.model");
 
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login

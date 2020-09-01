@@ -1,5 +1,5 @@
 const userController = require('../controllers/user.controller');
-const LogController = require('../controllers/log.controller');
+const LogController = require('./log.controller');
 
 const bcrypt = require('bcryptjs');
 
