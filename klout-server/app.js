@@ -11,7 +11,7 @@ const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
-const passportSetup = require("./configs/passport-setup");
+const passportSetup = require("./configs/passport.setup");
 const cookieSession = require("cookie-session");
 
 const { Strategy } = require("passport-twitter");
@@ -72,7 +72,7 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: ["*"], // <== Calls for this domain
+    origin: ['http://localhost:3001', 'http://localhost:3000'] // <== aceptar llamadas desde este dominio
   })
 );
 
