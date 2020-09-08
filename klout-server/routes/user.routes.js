@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const UserController = require("../controllers/user.controller");
+const router = express.Router();
 const uploadCloud = require("../configs/cloudinary.config.js");
 
 router.get("/", async (req, res, next) => {
@@ -11,7 +11,6 @@ router.get("/", async (req, res, next) => {
     res.status(500).json(err);
   }
 });
-
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await UserController.get(req.params.id);
@@ -20,46 +19,7 @@ router.get("/:id", async (req, res, next) => {
     res.status(500).json(err);
   }
 });
-
-router.post("/", uploadCloud.single("photo"), async (req, res, next) => {
-  let { name, email, password, image } = req.body;
-
-  try {
-    /*if (req.file) {
-      imgPath = req.file.path;
-      imgName = req.file.originalname;
-    } else {
-      imgPath = req.session.user.imgPath;
-      imgName = req.session.user.imgName;
-    }*/
-    await validateSignup(name, email, password);
-    const passwordHash = await bcrypt.hashSync(password, saltRounds);
-    //await Auth.signUp(name, email, passwordHash);
-    //if (req.session.user.passwordHash == passwordHash) {
-    req.session.user = await UserController.set({
-      _id: req.session.user._id,
-      name,
-      email,
-      passwordHash,
-      image,
-    });
-
-    res.redirect("");
-    //} else {
-    //  throw new Error("Password incorrect. Try again.");
-    //}
-  } catch (err) {
-    res.render("app/user", {
-      layout: "app/layout",
-      name,
-      email,
-      password,
-      image,
-    });
-  }
-});
-
-router.put("/", uploadCloud.single("Avatar"), async (req, res, next) => {
+router.put("/", uploadCloud.single("imageAvatar"), async (req, res, next) => {
   if (req.isAuthenticated()) {
     const user = {
       _id: req.user._id,
@@ -67,17 +27,22 @@ router.put("/", uploadCloud.single("Avatar"), async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
     };
-    let foundUser = await UserController.checkUsernameUser(
+    let foundUser = await UserController.checkUsernameDifferentUser(
       user.username,
       user._id
     );
     if (foundUser) {
-      res.status(400).json({ message: "Existing user. Use another." });
+      res.status(400).json({ message: "Usuari existent. Utilitza un altre." });
       return;
     } else {
-      foundUser = await UserController.checkEmailtUser(user.email, user._id);
+      foundUser = await UserController.checkEmailDifferentUser(
+        user.email,
+        user._id
+      );
       if (foundUser) {
-        res.status(400).json({ message: "Existing mail. Use another." });
+        res
+          .status(400)
+          .json({ message: "Correu existent. Utilitza un altre." });
         return;
       } else {
         try {
@@ -93,7 +58,69 @@ router.put("/", uploadCloud.single("Avatar"), async (req, res, next) => {
       }
     }
   } else {
-    res.status(500).json({ message: "You are not authenticated" });
+    res.status(500).json({ message: "No estàs autenticat" });
+  }
+});
+router.patch(
+  "/upload/",
+  uploadCloud.single("imageAvatar"),
+  async (req, res, next) => {
+    if (req.isAuthenticated()) {
+      try {
+        if (req.file) {
+          const editUser = await UserController.setImage(
+            req.user._id,
+            req.file.path
+          );
+
+          res.status(200).json(editUser);
+        }
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(500).json({ message: "No estàs autenticat" });
+    }
+  }
+);
+router.post("/checkemail", async (req, res, next) => {
+  try {
+    let exist = null;
+    if (req.user) {
+      exist = await UserController.checkEmailDifferentUser(
+        req.body.email,
+        req.user._id
+      );
+    } else {
+      exist = await UserController.checkEmail(req.body.email);
+    }
+    if (exist) {
+      res.status(200).json(exist);
+    } else {
+      res.status(404).json({ message: "Correu no registrat" });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+router.post("/checkusername", async (req, res, next) => {
+  try {
+    let exist = null;
+    if (req.user) {
+      exist = await UserController.checkUsernameDifferentUser(
+        req.body.username,
+        req.user._id
+      );
+    } else {
+      exist = await UserController.checkUsername(req.body.username);
+    }
+    if (exist) {
+      res.status(200).json(exist);
+    } else {
+      res.status(404).json({ message: "Usuari disponible" });
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 module.exports = router;
