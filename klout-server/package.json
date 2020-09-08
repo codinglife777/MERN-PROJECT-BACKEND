@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.3",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
+    "dayjs": "^1.8.35",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

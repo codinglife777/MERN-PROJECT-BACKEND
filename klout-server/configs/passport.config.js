@@ -1,5 +1,6 @@
 const UserController = require("../controllers/user.controller");
 const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const bcrypt = require("bcryptjs"); // !!!
 const passport = require("passport");
 
@@ -14,80 +15,94 @@ passport.deserializeUser((userIdFromSession, cb) => {
 });
 
 passport.use(
-  new LocalStrategy((username, password, next) => {
-    console.log(username, password);
-    UserController.findByUsername(username)
-      .then((foundUser) => {
-        if (!foundUser) {
-          next(null, false, {
-            message: "Incorrect username.",
-          });
-          return;
-        }
+  new LocalStrategy(
+    { passReqToCallback: true },
+    (req, username, password, next) => {
+      console.log("Passport is authenticating with Locla Strategy");
 
-        if (!bcrypt.compareSync(password, foundUser.password)) {
-          next(null, false, {
-            message: `Incorrect password.`,
-          });
-          return;
-        }
+      UserController.findByUsername(username)
+        .then((foundUser) => {
+          if (!foundUser) {
+            next(null, false, {
+              message: "Usuari incorrecte.",
+            });
+            return;
+          }
 
-        next(null, foundUser);
-      })
-      .catch((err) => {
-        next(err);
-        return;
-      });
-  })
+          if (!bcrypt.compareSync(password, foundUser.password)) {
+            next(null, false, {
+              message: `Clau d'acccés incorrecte`,
+            });
+            return;
+          }
+
+          next(null, foundUser);
+        })
+        .catch((err) => {
+          next(err);
+          return;
+        });
+    }
+  )
 );
 
-/*passport.use(new Strategy({
-  consumerKey: TWITTER_CONSUMER_KEY,
-  consumerSecret: TWITTER_CONSUMER_SECRET,
-  callbackURL: '/return'
-},
-(accessToken, refreshToken, profile, cb) => {
-  return cb(null, profile);
-}));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/api/auth/google/callback",
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // to see the structure of the data in received response:
+      // console.log('Google account details:', profile);
 
-passport.serializeUser((user, cb) => {
-cb(null, user);
-});
+      UserController.findByGoogleID(profile.id)
+        .then((foundUser) => {
+          if (foundUser) {
+            done(null, foundUser);
+            return;
+          }
 
-passport.deserializeUser((obj, cb) => {
-cb(null, obj);
-});*/
-
-/*passport.use(new Strategy({
-  clientID: FACEBOOK_CLIENT_ID,
-  clientSecret: FACEBOOK_CLIENT_SECRET,
-  callbackURL: '/return'
-},
-(accessToken, refreshToken, profile, cb) => {
-  return cb(null, profile);
-}));
-
-passport.serializeUser((user, cb) => {
-cb(null, user);
-});
-
-passport.deserializeUser((obj, cb) => {
-cb(null, obj);
-});*/
-
-/*passport.use(new Strategy({
-  clientID: GOOGLE_CLIENT_ID,
-  clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: '/return'
-},
-(accessToken, refreshToken, profile, cb) => {
-  return cb(null, profile);
-}));
-
-passport.serializeUser((user, cb) => {
-cb(null, user);
-});
-
-passport.deserializeUser((obj, cb) => {
-cb(null, obj);
-});*/
+          UserController.findByEmail(profile.emails[0].value).then(
+            (emailUser) => {
+              if (emailUser) {
+                emailUser["googleID"] = profile.id;
+                UserController.set(emailUser).then((editUser) => {
+                  done(null, editUser);
+                  return;
+                });
+              } else {
+                UserController.add(
+                  profile.emails[0].value,
+                  profile.displayName,
+                  profile.emails[0].value,
+                  null,
+                  profile.id
+                )
+                  .then((newUser) => {
+                    if (profile.photos && profile.photos[0]) {
+                      UserController.setImage(
+                        newUser._id,
+                        profile.photos[0].value
+                      ).then((imageUser) => {
+                        done(null, imageUser);
+                        return;
+                      });
+                    } else {
+                      done(null, newUser);
+                      return;
+                    }
+                  })
+                  .catch((err) => done(err));
+              }
+            }
+          );
+        })
+        .catch((err) => {
+          done(err);
+          return;
+        });
+    }
+  )
+);
