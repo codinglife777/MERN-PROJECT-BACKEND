@@ -1,4 +1,4 @@
-const User = require("../models/User.model");
+const User = require("../models/user.model");
 const mongoose = require("mongoose");
 class UserController {
   static async get(id) {
@@ -11,16 +11,14 @@ class UserController {
     return editUser;
   }
   static async addUser(user) {
-    const { username, name, email, password, googleID } = user;
-    return await UserController.add(username, name, email, password, googleID);
+    const { username, password } = user;
+    return await UserController.add(username, password);
   }
   static async add(username, name, email, password, googleID) {
     const newUser = await User.create({
       username,
-      name,
-      email,
+
       password,
-      googleID,
     });
     return newUser;
   }
@@ -41,18 +39,11 @@ class UserController {
   static async list() {
     return await User.find();
   }
-  static async findByEmail(email) {
-    return await User.findOne({ email });
-  }
+
   static async findByUsername(username) {
     return await User.findOne({ username });
   }
-  static async findByGoogleID(googleID) {
-    return await User.findOne({ googleID });
-  }
-  static async checkEmail(email) {
-    return await User.findOne({ email });
-  }
+  
   static async checkEmailDifferentUser(email, id) {
     return await User.findOne({
       email: { $eq: email },
