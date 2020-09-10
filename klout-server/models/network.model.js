@@ -4,15 +4,15 @@ const NetworkSchema = new mongoose.Schema(
   {
     facebook: {
         username: { type: String, required: true },
-        password: { type: String, required: true },
+        
     },
     twitter: {
         username: { type: String, required: true },
-        password: { type: String, required: true },
+        
     },
     instagram: {
         username: { type: String, required: true },
-        password: { type: String, required: true },
+        
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     

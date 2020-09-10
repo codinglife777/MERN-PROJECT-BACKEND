@@ -1,134 +1,104 @@
-const express = require('express')
-const authRoutes = express.Router()
+const express = require("express");
+const passport = require('passport');
+const router = express.Router();
+const User = require("../models/user.model");
 
-const passport = require('passport')
-const bcrypt = require('bcryptjs')
-const salt = bcrypt.genSaltSync(10);
+// Bcrypt to encrypt passwords
+const bcrypt = require("bcrypt");
+const bcryptSalt = 10;
 
-const User = require('../models/User.model')
 
-const uploader = require('../configs/cloudinary.config');
-
-authRoutes.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, theUser, failureDetails) => {
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, theUser, failureDetails) => {
     if (err) {
-        res.status(500).json({ message: 'Something went wrong authenticating user' });
-        return;
+      res
+        .status(500)
+        .json({ message: "Something went wrong authenticating user" });
+      return;
     }
+
     if (!theUser) {
-        // "failureDetails" contains the error messages
-        res.status(401).json(failureDetails);
-        return;
+     
+      res.status(401).json(failureDetails);
+      return;
     }
+
     // save user in session
-    req.login(theUser, (err) => {
-        if (err) {
-            res.status(500).json({ message: 'Session save went bad.' });
-            return;
-        }
-        // We are now logged in (that's why we can also send req.user)
-        res.status(200).json(theUser);
+    req.login(theUser, err => {
+      if (err) {
+        res.status(500).json({ message: "Session save went bad." });
+        return;
+      }
+      res.status(200).json(theUser);
     });
   })(req, res, next);
-})
+});
 
-authRoutes.post('/signup', (req, res, next) => {
-  const {username, password, campus, course} = req.body
+
+router.post("/signup", (req, res, next) => {
+  
+  const username = req.body.username;
+  const password = req.body.password;
+
+  console.log(username)
+
+  
   if (!username || !password) {
-    res.status(400).json({ message: 'Provide username and password' });
+    
+    res
+      .status(400)
+      .json({ message: "Indicate username, password" });
     return;
   }
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-  const notValidPwd = !regex.test(password)
-  if(notValidPwd){
-      res.status(400).json({ message: 'Password must have at least 6 characters, an upper case letter, a lower case and a number' });
-      return;
-  }
+
   User.findOne({ username }, (err, foundUser) => {
-      if(err){
-          res.status(500).json({message: "Username check went bad."});
-          return;
+    if (err) {
+      res.status(500).json({ message: "Username check went bad" });
+      return;
+    }
+    if (foundUser) {
+      res.status(400).json({ message: "The username already exists" });
+      return;
+    }
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const aNewUser = new User({
+      username: username,
+      password: hashPass
+    });
+    
+    aNewUser.save(err => {
+      if (err) {
+        res
+          .status(400)
+          .json({ message: "Saving user to database went wrong." });
+        return;
       }
-      if (foundUser) {
-          res.status(400).json({ message: 'Username taken. Choose another one.' });
-          return;
+    });
+    
+    req.login(aNewUser, err => {
+      if (err) {
+        res.status(500).json({ message: "Login after signup went bad." });
+        return;
       }
-      const hashPass = bcrypt.hashSync(password, salt);
-      const aNewUser = new User({
-          username,
-          password: hashPass,
-          
-      });
-      aNewUser.save(err => {
-          if (err) {
-              res.status(400).json({ message: 'Saving user to database went wrong.' });
-              return;
-          }
-          // Automatically log in user after sign up
-          // .login() here is actually predefined passport method
-          req.login(aNewUser, (err) => {
-              if (err) {
-                  res.status(500).json({ message: 'Login after signup went bad.' });
-                  return;
-              }
-              // Send the user's information to the frontend
-              // We can use also: res.status(200).json(req.user);
-              res.status(200).json(aNewUser);
-          });
-      });
+      res.status(200).json(aNewUser);
+    });
   });
 });
 
-authRoutes.post('/logout', (req, res, next) => {
-  // req.logout() is defined by passport
+
+router.get("/logout", (req, res) => {
   req.logout();
-  res.status(200).json({ message: 'Log out success!' });
+  res.status(200).json({message: "Logged out"});
 });
 
-authRoutes.get('/loggedin', (req, res, next) => {
-  // req.isAuthenticated() is defined by passport
+router.get('/loggedin', (req, res, next) => {
   if (req.isAuthenticated()) {
       res.status(200).json(req.user);
       return;
   }
   res.status(403).json({ message: 'Unauthorized' });
 });
-
-authRoutes.post('/edit', (req, res, next) => {
-  const {username, campus, course} = req.body
-  const userId = req.session.passport.user
-  User.findByIdAndUpdate(
-    userId, 
-    {username, campus, course}, 
-    {new: true}, 
-    (err, updatedProfile) => {
-      if (err) {
-        res.status(400).json({ message: 'Saving user to database went wrong.' });
-        return;
-      }
-      res.status(200).json(updatedProfile)
-    }
-  )
-})
-
-authRoutes.post('/upload', uploader.single("image"), (req, res, next) => {
-  if (!req.file) {
-    next(new Error('No file uploaded!'));
-    return;
-  }
-  const {_id: userId} = req.user
-  User.findByIdAndUpdate(
-    userId, 
-    {image: req.file.path}, 
-    {new: true}, 
-    (err, updatedProfile) => {
-      if (err) {
-        res.status(400).json({ message: 'Saving user to database went wrong.' });
-        return;
-      }
-      res.status(200).json(updatedProfile)
-    }
-  )
-})
-
-module.exports = authRoutes
+module.exports = router;

@@ -1,12 +1,22 @@
 const mongoose = require("mongoose");
 
-
 const ReportSchema = new mongoose.Schema(
   {
-    increase: { type: Number },
-    follows: { type: Number },
-    like: { type: Number },
-    rate: { type: Number },
+    facebook: {
+      follows: { type: Number },
+      like: { type: Number },
+      rate: { type: Number },
+    },
+    twitter: {
+      follows: { type: Number },
+      like: { type: Number },
+      rate: { type: Number },
+    },
+    Instagram: {
+      follows: { type: Number },
+      like: { type: Number },
+      rate: { type: Number },
+    },
 
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   },
