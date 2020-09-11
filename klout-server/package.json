@@ -21,6 +21,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "fs": "0.0.1-security",
     "hbs": "^4.1.1",
     "mongoose": "^5.10.1",
     "morgan": "^1.9.0",
@@ -30,11 +31,14 @@
     "nodusernameer": "^6.4.11",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
+    "passport-github": "^1.1.0",
+    "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "seeds": "^2.3.1",
     "serve-favicon": "^2.5.0",
+    "socket.io": "^2.3.0",
     "unidecode": "^0.1.8"
   },
   "devDependencies": {
