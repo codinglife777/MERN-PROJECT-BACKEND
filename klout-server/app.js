@@ -45,7 +45,7 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3001", "http://localhost:3000"], // <== aceptar llamadas desde este dominio
+    origin: ["http://localhost:3001", "http://localhost:3000","http://localhost:5000"], // <== aceptar llamadas desde este dominio
   })
 );
 
@@ -60,22 +60,22 @@ const index = require("./routes/index");
 app.use("/", index);
 
 const user = require("./routes/user.routes");
-app.use("/api", user);
+app.use("/api/user", user);
 
 const auth = require("./routes/auth.routes");
-app.use("/api", auth);
+app.use("/api/auth", auth);
 
-const network = require("./routes/network.routes");
+const reports = require("./routes/report.routes");
+app.use("/api/report", reports);
+
+/*const network = require("./routes/network.routes");
 app.use("/api", network);
 
 const support = require("./routes/support.routes");
 app.use("/api", support);
 
 const log = require("./routes/log.routes");
-app.use("/api", log);
-
-const reports = require("./routes/report.routes");
-app.use("/api", reports);
+app.use("/api", log);*/
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
