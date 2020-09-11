@@ -14,7 +14,7 @@ class UserController {
     const { username, password } = user;
     return await UserController.add(username, password);
   }
-  static async add(username, name, email, password, googleID) {
+  static async add(username, password) {
     const newUser = await User.create({
       username,
 
@@ -43,10 +43,10 @@ class UserController {
   static async findByUsername(username) {
     return await User.findOne({ username });
   }
-  
-  static async checkEmailDifferentUser(email, id) {
+
+  static async checkusernameDifferentUser(username, id) {
     return await User.findOne({
-      email: { $eq: email },
+      username: { $eq: username },
       _id: { $ne: id },
     });
   }
