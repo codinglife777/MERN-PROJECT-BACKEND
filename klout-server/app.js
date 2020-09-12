@@ -41,7 +41,7 @@ app.use(passport.initialize())*/
   saveUninitialized: true 
 }))*/
 
-// Connecting sockets to the server and adding them to the request 
+// Connecting sockets to the server and adding them to the request
 // so that we can access them later in the controller
 /*const io = socketio(server)
 app.set('io', io)*/
@@ -82,12 +82,17 @@ app.use(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public", "images", "klout1.png")));
 
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3001", "http://localhost:3000","http://localhost:5000"], // <== aceptar llamadas desde este dominio
+    origin: [
+      "http://localhost:3002",
+      "http://localhost:3001",
+      "http://localhost:3000",
+      "http://localhost:5000",
+    ], // <== aceptar llamadas desde este dominio
   })
 );
 
@@ -141,4 +146,13 @@ app.use((err, req, res, next) => {
   res.send("ERROR EN APP");
 });
 
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.use(express.static(path.join(__dirname, "build")));
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 module.exports = app;
