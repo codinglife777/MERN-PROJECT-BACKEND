@@ -1,6 +1,6 @@
 const express = require("express");
-const UserController = require("../controllers/user.controller");
 const router = express.Router();
+const UserController = require("../controllers/user.controller");
 const uploadCloud = require("../configs/cloudinary.config.js");
 
 router.get("/", async (req, res, next) => {
@@ -24,7 +24,6 @@ router.put("/", uploadCloud.single("imageAvatar"), async (req, res, next) => {
     const user = {
       _id: req.user._id,
       username: req.body.username,
-
       password: req.body.password,
     };
     let foundUser = await UserController.checkUsernameDifferentUser(
