@@ -10,7 +10,7 @@ Ironhack project at end of module 3 of Barcelona Full Stack Web Development Part
 
 # Link to App:
 
-https://klout.one
+https://klout.herokuapp.com/
 
 ## Description
 
@@ -228,7 +228,7 @@ The url to your repository and to your deployed project
 - [Repository Link Frontend] (https://github.com/jesussantana/MERN-PROJECT-FRONTEND)
 - [Repository Link Backend] (https://github.com/jesussantana/MERN-PROJECT-BACKEND)
 
-- [Deploy Link]()
+- [Deploy Link](https://klout.herokuapp.com/)
 
 ### Wireframe
 
