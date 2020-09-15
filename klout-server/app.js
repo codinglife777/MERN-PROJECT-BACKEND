@@ -92,7 +92,8 @@ app.use(
       "http://localhost:3001",
       "http://localhost:3000",
       "http://localhost:5000",
-      ""
+      "https://klout.herokuapp.com/",
+      "https://klout.herokuapp.com/api/",
     ], // <== aceptar llamadas desde este dominio
   })
 );
