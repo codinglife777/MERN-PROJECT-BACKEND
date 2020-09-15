@@ -242,4 +242,4 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link]()
+[Slides Link](https://prezi.com/i/0g80uhe7lw96/)
